@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/static/css/main.a0f511d3.css",
+    "main.js": "/static/js/main.9658873f.js",
+    "static/media/nathan-dumlao-yAS082fvix8-unsplash.jpg": "/static/media/nathan-dumlao-yAS082fvix8-unsplash.433a17ec40b61b2ffd82.jpg",
+    "static/media/amirhossein-soltani-JCyGsKePWNs-unsplash.jpg": "/static/media/amirhossein-soltani-JCyGsKePWNs-unsplash.3290f1aa55297a7572a2.jpg",
+    "static/media/collins-lesulie-0VEDrQXxrQo-unsplash.jpg": "/static/media/collins-lesulie-0VEDrQXxrQo-unsplash.01a0b8e578ba3b48d784.jpg",
+    "static/media/Dual Ball-1s-200px (1).gif": "/static/media/Dual Ball-1s-200px (1).53a95bb91b1b65a345de.gif",
+    "static/media/undraw_voice_control_ofo1.svg": "/static/media/undraw_voice_control_ofo1.7d44e9ef25bf41fe44f2d8851bb61bb8.svg",
+    "static/media/profile.png": "/static/media/profile.0d14c6999b4a5c8e86a7.png",
+    "static/media/undraw_quiz_nlyh.svg": "/static/media/undraw_quiz_nlyh.947160ac499d739449434a4e8021f584.svg",
+    "index.html": "/index.html",
+    "main.a0f511d3.css.map": "/static/css/main.a0f511d3.css.map",
+    "main.9658873f.js.map": "/static/js/main.9658873f.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a0f511d3.css",
+    "static/js/main.9658873f.js"
+  ]
+}

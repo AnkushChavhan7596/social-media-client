@@ -1,0 +1,43 @@
+
+.suggestion_item{
+    width: 95%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px .1px rgba(0,0,0,0.2);
+}
+
+.suggestion_item_left{
+    display: flex;
+    align-items: center;
+}
+
+.suggestion_item_left .name p{
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.suggestion_profile img{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.follow_btn button{
+    padding: 2px 10px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 5px;
+    color: white;
+    border: none;
+    outline: none;
+    background-color: #00D193;
+    cursor: pointer;
+    box-shadow: 1px 1px 5px .1px rgba(0,0,0,0.1);
+}
+

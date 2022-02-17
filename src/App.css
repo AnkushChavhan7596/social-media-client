@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Sansita:ital,wght@0,400;0,700;0,800;0,900;1,400;1,700;1,800;1,900&display=swap');
+
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Lobster', cursive;
+  font-family: 'Sansita', sans-serif;
+  font-family: 'Poppins', sans-serif;
+}
+
+.App{
+  background-color: rgba(128, 128, 128, 0.075);
+}
