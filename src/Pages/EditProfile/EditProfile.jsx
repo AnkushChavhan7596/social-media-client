@@ -34,7 +34,7 @@ const EditProfile = () => {
     // sending data to the backend for registration
     const updateUser = async ()=>{
         try{
-            const res = await axios.post(`https://social-media-ankush.herokuapp.com/edit-profile`, {user, token: Cookies.get("jwt")});
+            const res = await axios.post("http://localhost:8000/edit-profile", {user, token: Cookies.get("jwt")});
 
             if(res.status === 200){
                 Swal.fire(
@@ -73,7 +73,7 @@ const EditProfile = () => {
     /////////// load active user
     const loadActiveUser = async () =>{
         try{
-            const res = await axios.post(`https://social-media-ankush.herokuapp.com/get_active_user_by_token`, {token : Cookies.get("jwt")});
+            const res = await axios.post("http://localhost:8000/get_active_user_by_token", {token : Cookies.get("jwt")});
 
             if(res.status === 200){
                 console.log(res.data.activeUser)

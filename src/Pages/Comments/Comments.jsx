@@ -22,8 +22,8 @@ const Comments = () => {
 
     useEffect(() => {
         // loadCommentPost();
-        axios.post(`https://social-media-ankush.herokuapp.com/get_post_by_id`, { id: id }).then((res) => {
-            console.log(res)
+        axios.post(`http://localhost:8000/get_post_by_id`, { id: id }).then((res) => {
+
             if (res.status === 200) {
                 setCommentPost(res.data.post);
                 setPostUser(res.data.user);
@@ -42,7 +42,7 @@ const Comments = () => {
         const handleLike = async (authorID, postID) =>{
             try{
                 const id = authorID;
-                const res = await axios.post(`https://social-media-ankush.herokuapp.com/post-like/${id}`, {postID : postID});
+                const res = await axios.post(`http://localhost:8000/post-like/${id}`, {postID : postID});
 
                 if(res.status === 200){
                   console.log(res.data.msg);
@@ -66,7 +66,7 @@ const Comments = () => {
     const loadComments = async () => {
         try {
 
-            const res = await axios.get(`https://social-media-ankush.herokuapp.com/comments/get`);
+            const res = await axios.get("http://localhost:8000/comments/get");
 
             if (res.status === 200) {
                 setComments(res.data.reverse());
@@ -85,7 +85,7 @@ const Comments = () => {
     /////////////// handle comment post
     const handleCommentPost = async () => {
         try {
-            const res = await axios.post(`https://social-media-ankush.herokuapp.com/comment/post`, { comment: comment, postID: id, token: Cookies.get("jwt") });
+            const res = await axios.post("http://localhost:8000/comment/post", { comment: comment, postID: id, token: Cookies.get("jwt") });
 
             if (res.status === 200) {
                 console.log("Comment Posted");
@@ -114,7 +114,7 @@ const Comments = () => {
     //////////////////////////////////////////////////////////////////
     /////////////////////// load current active user
     const loadCurrentActiveUser = async () => {
-        const res = await axios.post(`https://social-media-ankush.herokuapp.com/get_active_user_by_token`, { token: Cookies.get("jwt") });
+        const res = await axios.post("http://localhost:8000/get_active_user_by_token", { token: Cookies.get("jwt") });
 
         if (res.status === 200) {
             setCurrentActiveUser(res.data.activeUser);
@@ -220,7 +220,7 @@ const Comments = () => {
 
 
                     <div className="comment_send_box">
-                        <input type="text" className="comment_input" value={comment} onChange={(e) => { setComment(e.target.value) }} name="comment" placeholder="Add public comment" />
+                        <input type="text" className="comment_input" value={comment} onChange={(e) => { setComment(e.target.value) }} name="comment" placeholder="Add public comment" autoComplete="off" />
                         <div className="comment_post_btn" onClick={handleCommentPost}>
                             <i className="fas fa-paper-plane"></i>
                             post
@@ -238,7 +238,7 @@ const Comments = () => {
 
 
                                     <div className="post_profile_img_wrapper">
-                                        <img src={postUser.profileImg ? `${process.env.REACT_APP_IMAGE_PATH}${postUser.profileImg}` : `${process.env.REACT_APP_IMAGE_PATH}user (1).png`} alt="profile" />
+                                        <img src={commentPost.profileImg ? `${process.env.REACT_APP_IMAGE_PATH}${commentPost.profileImg}` : `${process.env.REACT_APP_IMAGE_PATH}user (1).png`} alt="profile" />
                                     </div>
 
                                     <div className="post_profile_name_wrapper">

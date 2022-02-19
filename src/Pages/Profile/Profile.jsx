@@ -69,7 +69,7 @@ const Profile = () =>{
 
     // load active user
     const loadActiveUser = async () =>{
-        const res = await axios.post(`https://social-media-ankush.herokuapp.com/get_active_user_by_token`, {token : Cookies.get("jwt")})
+        const res = await axios.post("http://localhost:8000/get_active_user_by_token", {token : Cookies.get("jwt")})
                 
             if(res.status === 200){
                 setActiveUser(res.data.activeUser);
@@ -90,7 +90,7 @@ const Profile = () =>{
 
     //load posts
     const loadPosts = async () =>{
-        const res = await axios.get(`https://social-media-ankush.herokuapp.com/all-posts`)
+        const res = await axios.get("http://localhost:8000/all-posts")
             
             if(res.status === 200){
                 // setPosts(res.data.reverse())
@@ -138,7 +138,7 @@ const Profile = () =>{
         formData.append("profileImg", profileImg);
         formData.append("token", Cookies.get("jwt"));
 
-       const res = await axios.post(`https://social-media-ankush.herokuapp.com/post/update/profile-pic`, formData)
+       const res = await axios.post("http://localhost:8000/post/update/profile-pic", formData)
 
        if(res.status === 200){
            console.log("Profile pic updated");
@@ -164,7 +164,7 @@ const Profile = () =>{
     ////////// handle delte post
     const handleDeletePost = async (id) =>{
         try{
-           const res = await axios.post(`https://social-media-ankush.herokuapp.com/post/delete/${id}`);
+           const res = await axios.post(`http://localhost:8000/post/delete/${id}`);
 
            if(res.status === 200){
               console.log("Post delted");

@@ -33,7 +33,7 @@ const Register = () => {
     // sending data to the backend for registration
     const postUser = async () => {
         try {
-            const res = await axios.post(`https://social-media-ankush.herokuapp.com/register`, user);
+            const res = await axios.post("http://localhost:8000/register", user);
 
             if (res.status === 200) {
                 Swal.fire(

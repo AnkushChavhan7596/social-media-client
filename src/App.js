@@ -14,6 +14,7 @@ import Register from "./Pages/Register/Register";
 import PrivateRoute from './PrivateRoute/PrivateRoute';
 import Comments from './Pages/Comments/Comments';
 import ProfileUser from "./Pages/ProfileUsers/ProfileUser";
+import Explore from './Pages/Explore/Explore';
 import env from "react-dotenv";
 import Cookies from 'js-cookie';
 import React, {useState, useEffect} from "react";
@@ -23,16 +24,18 @@ import axios from 'axios';
 // require('dotenv-webpack');
 
 
+
+
 function App() {
 
     const [currentActiveUser, setCurrentActiveUser] = useState({});
 
-    ///////////////////////////////////////////
+        ///////////////////////////////
     //////////// load active user
 
     const loadActiveUser = async () => {
         try {
-            const res = await axios.post(`https://social-media-ankush.herokuapp.com/get_active_user_by_token`, { token: Cookies.get("jwt") });
+            const res = await axios.post("http://localhost:8000/get_active_user_by_token", { token: Cookies.get("jwt") });
 
             if (res.status === 200) {
                 setCurrentActiveUser(res.data.activeUser);
@@ -60,11 +63,11 @@ function App() {
                 <Routes>
 
                     <Route path="/" element={<PrivateRoute />}>
-                        <Route path="/" element={<Home />} />
+                        <Route path="/" element={<Home currentActiveUser={currentActiveUser} />} />
                     </Route>
 
                     <Route path="/home" element={<PrivateRoute />}>
-                        <Route path="/home" element={<Home />} />
+                        <Route path="/home" element={<Home currentActiveUser={currentActiveUser} />} />
                     </Route>
 
                     <Route path="/profile" element={<PrivateRoute />}>
@@ -72,7 +75,7 @@ function App() {
                     </Route>
 
                     <Route path="/profile/:id" element={<PrivateRoute />}>
-                        <Route path="/profile/:id" element={<ProfileUser />} />
+                        <Route path="/profile/:id" element={<ProfileUser currentActiveUser={currentActiveUser} />} />
                     </Route>
 
                     <Route path="/create-post" element={<PrivateRoute />}>
@@ -85,6 +88,10 @@ function App() {
 
                     <Route path="/comments/:id" element={<PrivateRoute />}>
                         <Route path="/comments/:id" element={<Comments />} />
+                    </Route>
+
+                    <Route path="/explore" element={<PrivateRoute />}>
+                        <Route path="/explore" element={<Explore currentActiveUser={currentActiveUser} />} />
                     </Route>
 
 

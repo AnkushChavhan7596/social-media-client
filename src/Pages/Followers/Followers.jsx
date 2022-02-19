@@ -5,6 +5,7 @@ import Loader from "../Loader/Loader";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useEffect } from "react";
+import SuggestionItem from "../../Components/SuggestionItem/SuggestionItem";
 
 const Followers = ({currentActiveUser}) => {
 
@@ -13,16 +14,16 @@ const Followers = ({currentActiveUser}) => {
     const [user, setUser] = useState({});
     const [followerUsers, setFollowerUsers] = useState([]);
     const [followingUsers, setFollowingUsers] = useState([]);
-    const [activeFollowerBlock, setActiveFollowerBlock] = useState("")
-    const [activeFollowingBlock, setActiveFollowingBlock] = useState("")
+    const [activeFollowersStyle, setActiveFollowersStyle] = useState("active_btn");
+    const [activeFollowingsStyle, setActiveFollowingsStyle] = useState("non_active_btn")
 
     ///////////////////////////////////
     ////// handle followers block
     const handleFollowersBlock = () => {
             setFollowersBlock("block");
             setFollowingsBlock("hide");
-            setActiveFollowerBlock("activeBlock")
-            setActiveFollowingBlock("inActiveBlock");
+            setActiveFollowersStyle("active_btn")
+            setActiveFollowingsStyle("non_active_btn");
     }
 
 
@@ -31,27 +32,52 @@ const Followers = ({currentActiveUser}) => {
     const handleFollowingsBlock = () => {
             setFollowingsBlock("block");
             setFollowersBlock("hide");
-            setActiveFollowerBlock("inActiveBlock")
-            setActiveFollowingBlock("activeBlock");
+            setActiveFollowersStyle("non_active_btn")
+            setActiveFollowingsStyle("active_btn");
     }
 
 
-     ///////////////////////////////////////////////////////
-    ////////////////////// get user by id
-    // const getUserById = async (id) =>{
-    //     try{
-    //         const res = await axios.get(`http://localhost:8000/get_user_by_id/${id}`);
+     /////////////////////////////////////////////////////
+    //////////////////// get user by id
+    const getUserById = async (id) =>{
+        try{
+            const res = await axios.get(`http://localhost:8000/get_user_by_id/${id}`);
 
-    //         if(res.status === 200){
-    //             setUser(res.data);
-    //         }
-    //         else{
-    //             console.log(res.data.msg)
-    //         }
-    //     }catch(error){
-    //         console.log(error.message);
-    //     }
-    // }
+            if(res.status === 200){
+                setUser(res.data);
+            }
+            else{
+                console.log(res.data.msg)
+            }
+        }catch(error){
+            console.log(error.message);
+        }
+    }
+
+        /////////////////////////////////////////
+    ////////////// load users
+
+    const loadUsers = async () =>{
+        try{
+            const res = await axios.get("http://localhost:8000/users");
+            console.log(res)
+
+            if(res.status === 200){
+                setUser(res.data);
+            }
+
+        }catch(error){
+            console.log(error.message);
+        }
+    }
+
+
+    useEffect(() =>{
+        loadUsers();
+    },[currentActiveUser])
+
+
+
 
 
     ///////////////////////////////////////////////////////////
@@ -59,9 +85,9 @@ const Followers = ({currentActiveUser}) => {
     const getAllFollowersUsers = async () =>{
             currentActiveUser.followers.map(async (followerID) =>{
                     try{
-                        const res = await axios.post(`https://social-media-ankush.herokuapp.com/get_user_by_id/${followerID}`);
+                        const res = await axios.post(`http://localhost:8000/get_user_by_id/${followerID}`);
                         if(res.status === 200){
-                            setFollowerUsers([...followerUsers, res.data.user]);
+                            setFollowerUsers((list) => [...list, res.data.user]);
                         }
                         else{
                             console.log(res.data.msg)
@@ -78,10 +104,10 @@ const Followers = ({currentActiveUser}) => {
     const getAllFollowingsUser = async () =>{
         currentActiveUser.followings.map( async (followingID) =>{
             try{
-                const res = await axios.post(`https://social-media-ankush.herokuapp.com/get_user_by_id/${followingID}`);
+                const res = await axios.post(`http://localhost:8000/get_user_by_id/${followingID}`);
 
                 if(res.status === 200){
-                    setFollowingUsers([...followingUsers, res.data.user]);
+                    setFollowingUsers((list) =>[...list, res.data.user]);
                 }
                 else{
                     console.log(res.data.msg);
@@ -95,13 +121,13 @@ const Followers = ({currentActiveUser}) => {
 
 
 
-    useEffect(()=>{
-            getAllFollowersUsers();
-    },[currentActiveUser])
+    useEffect(() => {
+      getAllFollowersUsers();
+    }, [currentActiveUser]);
 
-    useEffect(()=>{
-            getAllFollowingsUser();
-    },[currentActiveUser])
+    useEffect(() => {
+      getAllFollowingsUser();
+    }, [currentActiveUser]);
 
 
 
@@ -112,11 +138,11 @@ const Followers = ({currentActiveUser}) => {
                 <div className="followers___wrapper">
                     <div className="foll_wrapper_header">
                         <div className="left">
-                            <button className={`${activeFollowerBlock}`} onClick={handleFollowersBlock}>Followers</button>
+                            <button className={`${activeFollowersStyle}`} onClick={handleFollowersBlock}>Followers</button>
                         </div>
 
                         <div className="right">
-                            <button className={`${activeFollowingBlock}`} onClick={handleFollowingsBlock}>Followings</button>
+                            <button className={`${activeFollowingsStyle}`} onClick={handleFollowingsBlock}>Followings</button>
                         </div>
                     </div>
 
@@ -124,7 +150,7 @@ const Followers = ({currentActiveUser}) => {
                     <div className={`followers_wrapper___body ${followersBlock}`}>
 
                         {
-                            followerUsers.map((user) => {
+                          followerUsers.map((user) => {
 
                                     return (
                                         <div className="suggestion_item" key={user._id}>
@@ -137,9 +163,10 @@ const Followers = ({currentActiveUser}) => {
                                                 </div>
                                             </div>
                                             <div className="follow_btn">
-                                                <button>Follow</button>
+                                                <button >Follow</button>
                                             </div>
                                         </div>
+                                        // <SuggestionItem user={user} currentActiveUser={currentActiveUser} key={user._id}/>
                                 )
                             })
                         }
@@ -172,6 +199,7 @@ const Followers = ({currentActiveUser}) => {
                                                 <button>Unfollow</button>
                                             </div>
                                        </div>
+                                    // <SuggestionItem user={user} currentActiveUser={currentActiveUser} key={user._id}  />
             
                                 )
                             })

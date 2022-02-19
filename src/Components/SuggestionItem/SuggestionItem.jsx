@@ -6,8 +6,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import Cookies from "js-cookie";
 
-const SuggestionItem = ({ user }) =>{
-    const [activeUser, setActiveUser] = useState({});
+const SuggestionItem = ({ user,currentActiveUser }) =>{
     const [followTxt, setFollowTxt] = useState("Follow");
     const [unFollowTxt, setUnfollowTxt] = useState("Unfollow");
     
@@ -15,28 +14,59 @@ const SuggestionItem = ({ user }) =>{
     ///////////// handle follow unfollow
     const handleFollowUnfollow = async (userID) =>{
         try{
-            const res = await axios.post(`https://social-media-ankush.herokuapp.com/follow-unfollow`, { id : userID, token : Cookies.get("jwt")});
+            const res = await axios.post(`http://localhost:8000/follow-unfollow`, { id : userID, token : Cookies.get("jwt")});
 
             if(res.status === 200){
                 console.log(res.data.msg);
 
-                if(res.data.follow){
-                   if(followTxt === "Follow"){
-                       setFollowTxt("Unfollow")
-                   }
-                   else{
-                       setFollowTxt("Follow")
-                   }
-                }
-                else{
-                    if(res.data.unfollow){
-                        if(unFollowTxt === "Unfollow"){
-                            setUnfollowTxt("Follow");
-                        }else{
-                            setUnfollowTxt("Unfollow");
-                        }
+                // if(res.data.follow){
+                //    if(followTxt === "Follow"){
+                //        setFollowTxt("Unfollow")
+                //    }
+                //    else{
+                //        setFollowTxt("Follow")
+                //    }
+                // }
+                // else{
+                //     if(res.data.unfollow){
+                //         if(unFollowTxt === "Unfollow"){
+                //             setUnfollowTxt("Follow");
+                //         }else{
+                //             setUnfollowTxt("Unfollow");
+                //         }
+                //     }
+                // }
+
+
+                if(unFollowTxt === "Unfollow"){
+                    if(!res.data.follow){
+                        setUnfollowTxt("Follow");
+                    }
+                    else{
+                        setUnfollowTxt("Unfollow")
                     }
                 }
+                else{
+                    if(res.data.follow){
+                        setUnfollowTxt("Unfollow")
+                    }
+                }
+        
+        
+                if(followTxt === "Follow"){
+                    if(res.data.follow){
+                        setFollowTxt("Unfollow")
+                    }
+                    else{
+                        setFollowTxt("Follow")
+                    }
+                }
+                else{
+                    if(!res.data.follow){
+                        setFollowTxt("Follow")
+                    }
+                }
+                
             }
             else{
                 if(res.data.followedYourSelf){
@@ -56,29 +86,6 @@ const SuggestionItem = ({ user }) =>{
 
     }
 
-  ////////////////////////////////////////////
-  //////////// active user
-  const loadActiveUser = async (req, res)=>{
-      try{
-
-        const res = await axios.post(`https://social-media-ankush.herokuapp.com/get_active_user_by_token`, {token : Cookies.get("jwt")});
-
-        if(res.status === 200){
-            setActiveUser(res.data.activeUser);
-        }
-        else{
-            console.log(res.data.msg);
-        }
-
-      }catch(error){
-          console.log(error.message);
-      }
-  }
-
-  useEffect(()=>{
-      loadActiveUser();
-  },[])
-
 
 
    return(
@@ -86,7 +93,9 @@ const SuggestionItem = ({ user }) =>{
           <div className="suggestion_item">
               <div className="suggestion_item_left">
                     <div className="suggestion_profile">
-                       <img src={user.profileImg ? `${process.env.REACT_APP_IMAGE_PATH}${user.profileImg}` : `${process.env.REACT_APP_IMAGE_PATH}user (1).png`} alt="profile" />
+                        <Link to={`/profile/${user._id}`}>
+                           <img src={user.profileImg ? `${process.env.REACT_APP_IMAGE_PATH}${user.profileImg}` : `${process.env.REACT_APP_IMAGE_PATH}user (1).png`} alt="profile" />
+                       </Link>
                     </div>
                     <div className="name">
                         <p>{user.name}</p>
@@ -94,7 +103,7 @@ const SuggestionItem = ({ user }) =>{
               </div>
              
               <div className="follow_btn">
-                  <button onClick={() =>{handleFollowUnfollow(user._id)} }>{ user.followers.includes(activeUser._id) ? unFollowTxt : followTxt}</button>
+                  <button onClick={() =>{handleFollowUnfollow(user._id)} }>{ user.followers.includes(currentActiveUser._id) ? unFollowTxt : followTxt}</button>
               </div>
           </div>
 

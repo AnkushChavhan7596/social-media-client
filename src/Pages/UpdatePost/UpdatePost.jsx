@@ -38,7 +38,7 @@ const UpdatePost = () =>{
         setTitle("");
         setDescription("");
         
-        axios.post(`https://social-media-ankush.herokuapp.com/post/update/${id}`, formData, {
+        axios.post(`http://localhost:8000/post/update/${id}`, formData, {
             headers: {
                 "Content-type": "multipart/form-data",
             },                    
@@ -75,7 +75,7 @@ const UpdatePost = () =>{
     ///////////// load post data
     const loadPost = async () =>{
         try{
-            const res = await axios.post(`https://social-media-ankush.herokuapp.com/get_post_by_id/${id}`);
+            const res = await axios.post(`http://localhost:8000/get_post_by_id/${id}`);
 
             if(res.status === 200){
                 console.log(res.data.post);

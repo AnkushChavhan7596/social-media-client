@@ -20,7 +20,7 @@ const Comment = ({ comment, postID, commentsCount }) => {
 
     const loadCommentUser = async () => {
         try {
-            const res = await axios.post(`https://social-media-ankush.herokuapp.com/${comment.authorID}`);
+            const res = await axios.post(`http://localhost:8000/get_user_by_id/${comment.authorID}`);
 
             if (res.status === 200) {
                 setCommentUser(res.data.user);
@@ -37,7 +37,7 @@ const Comment = ({ comment, postID, commentsCount }) => {
 
     useEffect(() => {
         loadCommentUser();
-    }, [])
+    }, [comment])
 
 
 
@@ -66,7 +66,7 @@ const Comment = ({ comment, postID, commentsCount }) => {
     const loadActiveUser = async () => {
         try {
 
-            const res = await axios.post(`https://social-media-ankush.herokuapp.com/get_active_user_by_token`, { token: Cookies.get("jwt") });
+            const res = await axios.post("http://localhost:8000/get_active_user_by_token", { token: Cookies.get("jwt") });
 
             if (res.status === 200) {
                 setActiveUser(res.data.activeUser);
@@ -79,7 +79,7 @@ const Comment = ({ comment, postID, commentsCount }) => {
 
     useEffect(() => {
         loadActiveUser();
-    }, [])
+    }, [Cookies.get("jwt")])
 
 
 
@@ -104,7 +104,7 @@ const Comment = ({ comment, postID, commentsCount }) => {
     /////////////// handle delete the comment
     const handleDeleteComment = async (id) => {
         try {
-            const res = await axios.post(`https://social-media-ankush.herokuapp.com/comment/delete/${id}`);
+            const res = await axios.post(`http://localhost:8000/comment/delete/${id}`);
 
             if (res.status === 200) {
                 console.log("Comment Deleted");

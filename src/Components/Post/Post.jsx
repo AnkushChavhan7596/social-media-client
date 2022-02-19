@@ -20,10 +20,9 @@ const Post = ({ postData, currentActiveUser }) =>{
         // load active user
         const loadActivePostUser = async () =>{
 
-            const res = await axios.post(`https://social-media-ankush.herokuapp.com/${postData.authorID}`);
+            const res = await axios.post(`http://localhost:8000/get_user_by_id/${postData.authorID}`);
                     
                 if(res.status === 200){
-                    console.log(res.data.user)
                     setPostUser(res.data.user);
                     setLikeCount(postData.likes.length);
                 }
@@ -38,7 +37,7 @@ const Post = ({ postData, currentActiveUser }) =>{
         const loadComments = async () =>{
             try{
                 
-                const res = await axios.get(`https://social-media-ankush.herokuapp.com/comments/get`);
+                const res = await axios.get("http://localhost:8000/comments/get");
 
                 if(res.status === 200){
                     setComments(res.data);
@@ -68,8 +67,7 @@ const Post = ({ postData, currentActiveUser }) =>{
         const handleLike = async (authorID, postID) =>{
             try{
                 const id = authorID;
-                console.log(id)
-                const res = await axios.post(`https://social-media-ankush.herokuapp.com/post-like/${id}`, {postID : postID});
+                const res = await axios.post(`http://localhost:8000/post-like/${id}`, {postID : postID});
 
                 if(res.status === 200){
                   console.log(res.data.msg);

@@ -28,6 +28,16 @@
     background-color: transparent;
 }
 
+.active_btn{
+    background-color: rgba(32, 163, 224, 0.247) !important;
+    color: rgb(53, 53, 53) !important;
+}
+
+.non_active_btn{
+    background-color: white;
+    color: black;
+}
+
 .followers__main .foll_wrapper_header{
     height: 40px;
     width: 100%;

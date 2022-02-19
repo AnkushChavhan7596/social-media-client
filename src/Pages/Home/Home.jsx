@@ -10,15 +10,14 @@ import Loader from '../Loader/Loader';
 import Cookies from 'js-cookie';
  
 
-const Home = () =>{
+const Home = ({currentActiveUser}) =>{
 
     const [posts, setPosts] = useState([]);
     const [users, setUsers] = useState([]);
-    const [currentActiveUser, setCurrentActiveUser] = useState({});
 
     //load posts
     useEffect(()=>{
-        axios.get(`https://social-media-ankush.herokuapp.com/all-posts`).then((res)=>{
+        axios.get("http://localhost:8000/all-posts").then((res)=>{
             
             if(res.status === 200){
 
@@ -44,10 +43,10 @@ const Home = () =>{
 
     const loadUsers = async () =>{
         try{
-            const res = await axios.get(`https://social-media-ankush.herokuapp.com/users`);
+            const res = await axios.get("http://localhost:8000/users");
 
             if(res.status === 200){
-                setUsers(res.data);
+                setUsers(res.data.filter(user => !currentActiveUser.followings.includes(user._id)));
             }
 
         }catch(error){
@@ -55,29 +54,12 @@ const Home = () =>{
         }
     }
 
-             //////////////////////////////////////////////////////////////////
-       /////////////////////// load current active user
-       const loadCurrentActiveUser = async () =>{
-        const res = await axios.post(`https://social-media-ankush.herokuapp.com/get_active_user_by_token`, {token : Cookies.get("jwt")});
-        if(res.status === 200){
-            setCurrentActiveUser(res.data.activeUser);
-        }
-        else{
-            console.log(res.data.msg);
-        }
-    } 
-
-        useEffect(()=>{
-            loadCurrentActiveUser();
-        },[])
-
-
 
 
 
     useEffect(() =>{
         loadUsers();
-    },[])
+    },[currentActiveUser])
 
 
 
@@ -114,17 +96,20 @@ const Home = () =>{
 
                     <div className="friend_suggestion">
                         {
-                            users.filter(user => user._id !== currentActiveUser._id).slice(0,9).map((user)=>{
+                           
+                            users.filter(user => currentActiveUser._id !== user._id)
+                            .slice(0,9).map((user)=>{
                                 return(
-                                    <SuggestionItem user={user} key={user._id}/>
+                                    <SuggestionItem user={user} currentActiveUser={currentActiveUser} key={user._id}/>
                                 )
                             })
+                    
                         }
         
                     </div>
 
                     <div className="view_more_btn_wrapper">
-                       <Link to="/" className="view_more">View More</Link>
+                       <Link to="/explore" className="view_more">View More</Link>
                     </div>
 
                </div>

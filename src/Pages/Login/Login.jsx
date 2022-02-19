@@ -34,11 +34,13 @@ const Login = () => {
     const loginUser = async () =>{
         try{
 
-            const res = await axios.post(`https://social-media-ankush.herokuapp.com/login`, user);
+            const res = await axios.post("http://localhost:8000/login", user);
 
             if(res.status === 200 && res.data.token){
                 console.log("Hello there")
-                Cookies.set("jwt", res.data.token);
+
+                // setting cookie
+                Cookies.set("jwt", res.data.token, {expires : 30});
 
                 console.log(res)
 
