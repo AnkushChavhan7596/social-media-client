@@ -292,7 +292,9 @@
     }
 
     .comments_div{
-        padding: 10px 10px;
+        height: 170px;
+        padding: 10px 5px;
+        overflow-y: auto;
     }
 
     .comment_input{
