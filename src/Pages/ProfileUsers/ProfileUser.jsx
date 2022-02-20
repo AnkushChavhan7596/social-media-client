@@ -21,7 +21,9 @@ const ProfileUser = ({ currentActiveUser }) => {
   // load user that is clicked user
   // load user by id
   const loadClickedUser = async () => {
-    const res = await axios.post(`http://localhost:8000/get_user_by_id/${id}`);
+    const res = await axios.post(
+      `https://social-media-ankush.herokuapp.com/get_user_by_id/${id}`
+    );
 
     if (res.status === 200) {
       setClickedUser(res.data.user);
@@ -36,7 +38,9 @@ const ProfileUser = ({ currentActiveUser }) => {
 
   //load posts
   const loadPosts = async () => {
-    const res = await axios.get("http://localhost:8000/all-posts");
+    const res = await axios.get(
+      "https://social-media-ankush.herokuapp.com/all-posts"
+    );
 
     if (res.status === 200) {
       // setPosts(res.data.reverse())
@@ -64,10 +68,13 @@ const ProfileUser = ({ currentActiveUser }) => {
   ///////////// handle follow unfollow
   const handleFollowUnfollow = async (userID) => {
     try {
-      const res = await axios.post(`http://localhost:8000/follow-unfollow`, {
-        id: userID,
-        token: Cookies.get("jwt"),
-      });
+      const res = await axios.post(
+        `https://social-media-ankush.herokuapp.com/follow-unfollow`,
+        {
+          id: userID,
+          token: Cookies.get("jwt"),
+        }
+      );
 
       if (res.status === 200) {
         console.log(res.data.msg);
@@ -88,36 +95,30 @@ const ProfileUser = ({ currentActiveUser }) => {
         //   }
         // }
 
-        if(unFollowTxt === "Unfollow"){
-            if(!res.data.follow){
-                setUnfollowTxt("Follow");
-            }
-            else{
-                setUnfollowTxt("Unfollow")
-            }
-        }
-        else{
-            if(res.data.follow){
-                setUnfollowTxt("Unfollow")
-            }
+        if (unFollowTxt === "Unfollow") {
+          if (!res.data.follow) {
+            setUnfollowTxt("Follow");
+          } else {
+            setUnfollowTxt("Unfollow");
+          }
+        } else {
+          if (res.data.follow) {
+            setUnfollowTxt("Unfollow");
+          }
         }
 
-
-        if(followTxt === "Follow"){
-            if(res.data.follow){
-                setFollowTxt("Unfollow")
-            }
-            else{
-                setFollowTxt("Follow")
-            }
-        }
-        else{
-            if(!res.data.follow){
-                setFollowTxt("Follow")
-            }
+        if (followTxt === "Follow") {
+          if (res.data.follow) {
+            setFollowTxt("Unfollow");
+          } else {
+            setFollowTxt("Follow");
+          }
+        } else {
+          if (!res.data.follow) {
+            setFollowTxt("Follow");
+          }
         }
 
-        
         // if(res.data.follow){
         //     if(unFollowTxt === "Unfollow"){
         //         setUnfollowTxt("Follow");
@@ -128,8 +129,6 @@ const ProfileUser = ({ currentActiveUser }) => {
         //     setUnfollowTxt("Unfollow");
         //     setFollowTxt("Follow")
         // }
-
-
       } else {
         if (res.data.followedYourSelf) {
           console.log("You can't follow yourself");
@@ -202,7 +201,7 @@ const ProfileUser = ({ currentActiveUser }) => {
                     >
                       {clickedUser.followers.includes(currentActiveUser._id)
                         ? unFollowTxt
-                        : followTxt }
+                        : followTxt}
                     </button>
                   </div>
                 </div>
@@ -212,8 +211,8 @@ const ProfileUser = ({ currentActiveUser }) => {
                 <img
                   src={
                     clickedUser.profileImg
-                      ? `${process.env.REACT_APP_IMAGE_PATH}${clickedUser.profileImg}`
-                      : `${process.env.REACT_APP_IMAGE_PATH}user (1).png`
+                      ? `https://social-media-ankush.herokuapp.com/public/Images/${clickedUser.profileImg}`
+                      : `https://social-media-ankush.herokuapp.com/public/Images/user (1).png`
                   }
                   alt="profileImg"
                 />
@@ -233,7 +232,7 @@ const ProfileUser = ({ currentActiveUser }) => {
                       return (
                         <div className="profile_post" key={post._id}>
                           <img
-                            src={`${process.env.REACT_APP_IMAGE_PATH}${post.postImage}`}
+                            src={`https://social-media-ankush.herokuapp.com/public/Images/${post.postImage}`}
                             alt="img"
                           />
                         </div>

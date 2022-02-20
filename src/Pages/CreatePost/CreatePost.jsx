@@ -35,7 +35,7 @@ const CreatePost = () =>{
         setTitle("");
         setDescription("");
         
-        axios.post("http://localhost:8000/post/upload", formData, {
+        axios.post("https://social-media-ankush.herokuapp.com/post/upload", formData, {
             headers: {
                 "Content-type": "multipart/form-data",
             },                    
@@ -71,7 +71,7 @@ const CreatePost = () =>{
     // load active user
     useEffect(()=>{
        
-        axios.post("http://localhost:8000/get_active_user", {token : Cookies.get("jwt")}).then((res)=>{
+        axios.post("https://social-media-ankush.herokuapp.com/get_active_user", {token : Cookies.get("jwt")}).then((res)=>{
 
             if(res.status === 200){
                 console.log(res.data.activeUser);

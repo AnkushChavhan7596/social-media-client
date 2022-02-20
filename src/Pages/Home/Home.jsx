@@ -17,7 +17,7 @@ const Home = ({currentActiveUser}) =>{
 
     //load posts
     useEffect(()=>{
-        axios.get("http://localhost:8000/all-posts").then((res)=>{
+        axios.get("https://social-media-ankush.herokuapp.com/all-posts").then((res)=>{
             
             if(res.status === 200){
 
@@ -34,7 +34,7 @@ const Home = ({currentActiveUser}) =>{
         })
 
 
-    }, []);
+    }, [posts]);
 
     
 
@@ -43,7 +43,7 @@ const Home = ({currentActiveUser}) =>{
 
     const loadUsers = async () =>{
         try{
-            const res = await axios.get("http://localhost:8000/users");
+            const res = await axios.get("https://social-media-ankush.herokuapp.com/users");
 
             if(res.status === 200){
                 setUsers(res.data.filter(user => !currentActiveUser.followings.includes(user._id)));
@@ -59,7 +59,7 @@ const Home = ({currentActiveUser}) =>{
 
     useEffect(() =>{
         loadUsers();
-    },[currentActiveUser])
+    },[currentActiveUser,users])
 
 
 

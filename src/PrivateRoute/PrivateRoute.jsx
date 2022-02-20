@@ -12,7 +12,7 @@ const PrivateRoute = () =>{
     useEffect(()=>{
         const token = Cookies.get("jwt");
         if(token){
-           axios.post("http://localhost:8000/check_user", {token: Cookies.get("jwt")}).then((res)=>{
+           axios.post("https://social-media-ankush.herokuapp.com/check_user", {token: Cookies.get("jwt")}).then((res)=>{
  
               if(res.status === 200 && res.data.isAuth){
                   console.log(res.data.msg);

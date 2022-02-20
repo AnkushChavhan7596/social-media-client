@@ -15,7 +15,7 @@ const Explore = ({ currentActiveUser }) => {
   //////////// get all users
   const getAllusers = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/users");
+      const res = await axios.get("https://social-media-ankush.herokuapp.com/users");
 
       if (res.status === 200) {
          let exploreList = res.data.filter(user => !currentActiveUser.followings.includes(user._id))
@@ -39,7 +39,7 @@ const Explore = ({ currentActiveUser }) => {
   ///////////// handle follow unfollow
   const handleFollowUnfollow = async (userID) =>{
       try{
-          const res = await axios.post(`http://localhost:8000/follow-unfollow`, { id : userID, token : Cookies.get("jwt")});
+          const res = await axios.post(`https://social-media-ankush.herokuapp.com/follow-unfollow`, { id : userID, token : Cookies.get("jwt")});
 
           if(res.status === 200){
               console.log(res.data.msg);

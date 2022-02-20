@@ -28,7 +28,7 @@ const FriendsPost = ({posts}) =>{
                                          return(
                                              <SwiperSlide className='slide' key={post._id}>
                                                  <Link to={`/comments/${post._id}`}>
-                                                     <img src={`${process.env.REACT_APP_IMAGE_PATH}${post.postImage}`} alt="img" />
+                                                     <img src={`https://social-media-ankush.herokuapp.com/public/Images/${post.postImage}`} alt="img" />
                                                   </Link>
                                              </SwiperSlide>
                                          )

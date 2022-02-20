@@ -27,7 +27,7 @@ const Navbar = () => {
   ///////////////////////////////////////////
   ////////////// load posts
   const loadPosts = async () => {
-    const res = await axios.get("http://localhost:8000/all-posts");
+    const res = await axios.get("https://social-media-ankush.herokuapp.com/all-posts");
 
     if (res.status === 200) {
       setPosts(res.data.reverse());
@@ -46,7 +46,7 @@ const Navbar = () => {
     if (Cookies.get("jwt")) {
       try {
         const res = await axios.post(
-          "http://localhost:8000/get_active_user_by_token",
+          "https://social-media-ankush.herokuapp.com/get_active_user_by_token",
           { token: Cookies.get("jwt") }
         );
 
@@ -71,7 +71,7 @@ const Navbar = () => {
   /////////////////////// load current active user
   const loadCurrentActiveUser = async () => {
     const res = await axios.post(
-      "http://localhost:8000/get_active_user_by_token",
+      "https://social-media-ankush.herokuapp.com/get_active_user_by_token",
       { token: Cookies.get("jwt") }
     );
     if (res.status === 200) {
@@ -149,8 +149,8 @@ const Navbar = () => {
                   className="profile_round_img"
                   src={
                     activeUser.profileImg
-                      ? `${process.env.REACT_APP_IMAGE_PATH}${activeUser.profileImg}`
-                      : `${process.env.REACT_APP_IMAGE_PATH}user (1).png`
+                      ? `https://social-media-ankush.herokuapp.com/public/Images/${activeUser.profileImg}`
+                      : `https://social-media-ankush.herokuapp.com/public/Images/user (1).png`
                   }
                   alt=""
                 />

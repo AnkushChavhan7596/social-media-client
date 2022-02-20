@@ -35,9 +35,10 @@ function App() {
 
     const loadActiveUser = async () => {
         try {
-            const res = await axios.post("http://localhost:8000/get_active_user_by_token", { token: Cookies.get("jwt") });
-
+            const res = await axios.post(`https://social-media-ankush.herokuapp.com/get_active_user_by_token`, { token: Cookies.get("jwt") });
+            console.log()
             if (res.status === 200) {
+                console.log(res.data.activeUser)
                 setCurrentActiveUser(res.data.activeUser);
             }
             else {
@@ -87,7 +88,7 @@ function App() {
                     </Route>
 
                     <Route path="/comments/:id" element={<PrivateRoute />}>
-                        <Route path="/comments/:id" element={<Comments />} />
+                        <Route path="/comments/:id" element={<Comments currentActiveUser={currentActiveUser} />} />
                     </Route>
 
                     <Route path="/explore" element={<PrivateRoute />}>

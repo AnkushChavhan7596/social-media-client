@@ -136,7 +136,7 @@
 @media screen and (max-width: 550px){
     .friends_posts{
         width: 100vw !important;
-        height: 130px;
+        height: 120px;
         padding: 10px 7px;
         background-color: white;
         overflow: hidden;
@@ -145,24 +145,88 @@
 
      .friendsPost{
         width: 110px;
-        height: 95%;
+        height: 100%;
     }
+
+    .slide{
+        width: 95px !important;
+    }
+
+  
 
 }
 
 
 @media screen and (max-width: 400px){
-    /* .friends_posts{
+    .slide{
+        width: 90px !important;
+    }
+    .slide img{
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+    .friends_posts{
         width: 100vw !important;
-        height: 150px;
-        padding: 10px 10px;
+        height: 110px !important;
+        padding: 10px 7px;
         background-color: white;
         overflow: hidden;
         cursor: pointer;
      }
 
      .friendsPost{
-        width: 200px;
-        height: 95%;
-    } */
+        width: 70px !important;
+        height: 100%;
+    }
+}
+
+
+@media screen and (max-width: 370px){
+    .slide{
+        width: 80px !important;
+    }
+    .slide img{
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+    .friends_posts{
+        width: 100vw !important;
+        height: 105px !important;
+        padding: 10px 7px;
+        background-color: white;
+        overflow: hidden;
+        cursor: pointer;
+     }
+
+     .friendsPost{
+        width: 70px !important;
+        height: 100%;
+    }
+}
+
+
+@media screen and (max-width: 350px){
+    .slide{
+        width: 75px !important;
+    }
+    .slide img{
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+    .friends_posts{
+        width: 100vw !important;
+        height: 100px !important;
+        padding: 10px 7px;
+        background-color: white;
+        overflow: hidden;
+        cursor: pointer;
+     }
+
+     .friendsPost{
+        width: 60px !important;
+        height: 100%;
+    }
 }
