@@ -378,7 +378,7 @@
     }
 
     .comments_div{
-        height: 170px;
+        height: 250px !important;
         padding: 10px 5px;
         overflow-y: auto;
     }
