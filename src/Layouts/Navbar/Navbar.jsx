@@ -91,7 +91,7 @@ const Navbar = () => {
         <div className="nav_left">
           <div className="logo">
             <Link to="/" className="logo_link">
-              Social
+              ShareFun
             </Link>
           </div>
           <div className="search_wrapper">

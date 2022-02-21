@@ -79,7 +79,7 @@
 
 .logo_link{
    text-decoration: none;
-   padding: 4px 30px;
+   padding: 4px 15px;
    font-size: 16px;
    letter-spacing: .3px;
    border-radius: 7px;
@@ -254,9 +254,13 @@ a{
 }
 
 
-@media screen and (max-width: 550px){
+@media screen and (max-width: 600px){
     .search_wrapper input{
-        width: 300px !important;
+        width: 180px !important;
+    }
+
+    .navbar{
+        padding: 0 5px;
     }
 }
 
@@ -405,13 +409,13 @@ a{
 }
 
 
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 560px) {
     .navbar{
-        padding: 0 10px;
+        padding: 0 5px;
     }
 
     .search_wrapper input{
-        width: 220px;
+        width: 280px !important;
     }
 
 
@@ -502,8 +506,24 @@ a{
     .search_wrapper input{
         max-width: 220px !important;
     }
+    .navbar{
+        padding: 0 5px;
+    }
+    
+    .logo_link{
+        padding: 5px 15px;
+        margin-right: 10px !important;
+        margin:0;
+     }
+}
+
+@media screen and (max-width: 380px) {
+    .search_wrapper input{
+        max-width: 220px !important;
+    }
     
 }
+
 
 
 @media screen and (max-width: 360px) {
@@ -513,7 +533,25 @@ a{
      }
 
     .search_wrapper input{
-        width: 180px !important;
+        width: 200px !important;
+    }
+
+    .nav_left{
+        padding: 0 10px;
+    }
+
+
+
+}
+
+@media screen and (max-width: 325px) {
+    .logo_link{
+        padding: 4px 20px;
+        font-size: 14px;
+     }
+
+    .search_wrapper input{
+        width: 170px !important;
     }
 
     .nav_left{
@@ -525,12 +563,53 @@ a{
 }
 
 
-@media screen and (max-width: 360px) {
-  
+@media screen and (max-width: 300px) {
+    .logo_link{
+        padding: 4px 20px;
+        font-size: 14px;
+     }
 
     .search_wrapper input{
-        width: 160px !important;
+        width: 140px !important;
+    }
+
+    .nav_left{
+        padding: 0 10px;
     }
 
 }
 
+
+@media screen and (max-width: 270px) {
+    .logo_link{
+        padding: 4px 20px;
+        font-size: 14px;
+     }
+
+    .search_wrapper input{
+        width: 120px !important;
+    }
+
+    .nav_left{
+        padding: 0 10px;
+    }
+
+}
+
+
+
+@media screen and (max-width: 245px) {
+    .logo_link{
+        padding: 4px 20px;
+        font-size: 14px;
+     }
+
+    .search_wrapper input{
+        width: 100px !important;
+    }
+
+    .nav_left{
+        padding: 0 10px;
+    }
+
+}
